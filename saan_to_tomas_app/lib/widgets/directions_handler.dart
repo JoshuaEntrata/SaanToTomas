@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:saan_to_tomas_app/.env.dart';
+import 'package:saan_to_tomas_app/widgets/.env.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'directions_model.dart';
-import 'dart:convert';
+import '../model/directions_model.dart';
 
 class DirectionsHandler {
   static const String _baseUrl =
