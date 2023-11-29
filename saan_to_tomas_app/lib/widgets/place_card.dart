@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:saan_to_tomas_app/model/places.dart';
+import 'package:saan_to_tomas_app/screens/maps_screen.dart';
 
 class PopularPlacesCard extends StatelessWidget {
-  const PopularPlacesCard({super.key});
+  const PopularPlacesCard({super.key, required this.place});
+
+  final Places place;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
           //TODO: Make this dynamic so it routes to specific map
-          Navigator.pushReplacementNamed(context, '/map');
+          // Navigator.pushReplacementNamed(context, '/map');
+          // Navigator.of(context).pushReplacementNamed('/map', arguments: {
+          //   'place': place,
+          // });
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => MapPage(
+              place: place,
+            ),
+          ));
         },
         child: Container(
           width: double.infinity,
@@ -45,16 +57,16 @@ class PopularPlacesCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 220.0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           //TODO: Update this so it gets the name of a specific place
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              'Place Name',
-                              style: TextStyle(
+                              place.name,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                                 color: Color(0xFF2A2A2A),
@@ -69,9 +81,9 @@ class PopularPlacesCard extends StatelessWidget {
                               color: const Color(0xFF00529B),
                             ),
                             //TODO: Update this so it gets the category of a specific place
-                            child: const Text(
-                              'Category',
-                              style: TextStyle(
+                            child: Text(
+                              place.category,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 8,
                                 color: Colors.white,
@@ -83,21 +95,21 @@ class PopularPlacesCard extends StatelessWidget {
                     ),
 
                     // 2nd row
-                    Container(
+                    SizedBox(
                       width: 200,
-                      child: const Row(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.location_pin,
+                          const Icon(Icons.location_pin,
                               size: 11, color: Color(0xFF00529B)),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Flexible(
                             //TODO: Update this so it gets the address of a specific place
                             child: Text(
-                              '1241 Asturias St, Sampaloc, Manila, 1015 Metro Manila · 0.85 km · 4 min',
+                              place.address,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10,
                                 color: Color(0xFF00529B),
@@ -109,21 +121,21 @@ class PopularPlacesCard extends StatelessWidget {
                     ),
 
                     // 3rd row
-                    Container(
+                    SizedBox(
                       width: 200,
-                      child: const Row(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.notes_outlined,
+                          const Icon(Icons.notes_outlined,
                               size: 11, color: Color(0xFF00529B)),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           //TODO: Update this so it gets the description of a specific place
                           Flexible(
                             child: Text(
-                              'Angkong Dimsum is famous in Manila. It is a dimsum place near UST.',
+                              place.description,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10,
                                 color: Color(0xFF00529B),

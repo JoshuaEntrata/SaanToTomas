@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:saan_to_tomas_app/database/places_db_v2.dart';
 import 'package:saan_to_tomas_app/model/places.dart';
 
-final PlacesDB placesDB = PlacesDB();
-final Places places = placesDB.getPlace();
-
 class DescriptionCard extends StatefulWidget {
-  const DescriptionCard({Key? key});
+  DescriptionCard({super.key, required this.place});
+  Places place;
 
   @override
-  State<DescriptionCard> createState() => _DescriptionCardState();
+  State<DescriptionCard> createState() => _DescriptionCardState(place);
 }
 
 //TODO: Update the UI of the initial description button before dragging or clicking
 //TODO: Update the border radius of the active description widget and add the icon of rounded rectangle at top
 class _DescriptionCardState extends State<DescriptionCard> {
+  _DescriptionCardState(this.place);
+  Places place;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -47,9 +48,10 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //TODO: Update this so it gets the name of a specific place
                         children: [
-                          const Text(
-                            "Angkong Dimsum",
-                            style: TextStyle(
+                          Text(
+                            // TODO: Ayusin texts sa name kasi nagooverflow
+                            place.name,
+                            style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -65,9 +67,9 @@ class _DescriptionCardState extends State<DescriptionCard> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             //TODO: Update this so it gets the category of a specific place
-                            child: const Text(
-                              "Restaurant",
-                              style: TextStyle(
+                            child: Text(
+                              place.category,
+                              style: const TextStyle(
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 11,
@@ -78,16 +80,16 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const Row(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //TODO: Update this so it gets the address of a specific place
-                          Icon(Icons.location_pin, color: Colors.blue),
-                          SizedBox(width: 10),
+                          const Icon(Icons.location_pin, color: Colors.blue),
+                          const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              "1241 Asturias St, Sampaloc, Manila, 1015 Metro Manila · 0.85 km · 4 min",
-                              style: TextStyle(
+                              place.address,
+                              style: const TextStyle(
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
@@ -97,16 +99,16 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         ],
                       ),
                       const SizedBox(height: 5),
-                      const Row(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.notes_outlined, color: Colors.blue),
-                          SizedBox(width: 10),
+                          const Icon(Icons.notes_outlined, color: Colors.blue),
+                          const SizedBox(width: 10),
                           Expanded(
                             //TODO: Update this so it gets the description of a specific place
                             child: Text(
-                              "Angkong Dimsum House, located on P. Noval street, sells a variety of different kinds of siomai: it has pork, chicken, quail, and Japanese siomai. It also offers different kinds of dumplings, if you’re looking for something a little different.",
-                              style: TextStyle(
+                              place.description,
+                              style: const TextStyle(
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:saan_to_tomas_app/database/places_db_v2.dart';
+import 'package:saan_to_tomas_app/model/places.dart';
 
 class Categories extends StatelessWidget {
   const Categories({Key? key});
@@ -33,9 +35,13 @@ class Categories extends StatelessWidget {
       BuildContext context, String title, String iconName) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/result', arguments: {'title': title});
+        final PlacesDB placesDB = PlacesDB();
+        List<Places> places =  placesDB.getCategoryList(title);
+        Navigator.of(context).pushReplacementNamed('/result', arguments: {
+          'places': places, 'category': title,
+        });
       },
-      child: Container(
+      child: SizedBox(
         width: 100,
         height: 76,
         child: Column(
