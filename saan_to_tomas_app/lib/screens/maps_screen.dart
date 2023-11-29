@@ -6,6 +6,7 @@ import 'package:saan_to_tomas_app/widgets/description_card.dart';
 import 'package:saan_to_tomas_app/widgets/title_bar.dart';
 import 'package:saan_to_tomas_app/model/places.dart';
 import 'package:saan_to_tomas_app/database/places_db_v2.dart';
+import '../widgets/header.dart';
 
 final PlacesDB placesDB = PlacesDB();
 final Places places = placesDB.getPlace();
@@ -18,16 +19,18 @@ class MapPage extends StatefulWidget {
 }
 
 class MapPageState extends State<MapPage> {
-
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        TitleBar(),
-        MapScreen(),
-        DescriptionCard(),
-      ],
+    return const Scaffold(
+      appBar: HeaderWidget(title: 'Angkong Dimsum'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // TitleBar(),
+          MapScreen(),
+          DescriptionCard(),
+        ],
+      ),
     );
   }
 }
@@ -45,10 +48,9 @@ class _MapScreenState extends State<MapScreen> {
   late GoogleMapController _googleMapController;
 
   static const _initialCameraPosition = CameraPosition(
-    //TODO: gawing in between ng origin and destination yung cam pos
+      //TODO: gawing in between ng origin and destination yung cam pos
       target: LatLng(14.6100, 120.9893),
-      zoom: 18
-  );
+      zoom: 18);
 
   static final _origin = Marker(
       markerId:  const MarkerId("origin"),
@@ -64,8 +66,8 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   void setDirection() async {
-    final directions = await DirectionsHandler()
-        .getDirections(origin: _origin.position, destination: _destination.position);
+    final directions = await DirectionsHandler().getDirections(
+        origin: _origin.position, destination: _destination.position);
     setState(() => _directions = directions);
   }
 
