@@ -2,31 +2,28 @@ import 'package:flutter/material.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/categories.dart';
 import '../widgets/place_card.dart';
+import '../widgets/header.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const HeaderWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // const Header(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 24),
               color: const Color(0xFFFAFAFA),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SearchBarWidget(),
-                  SizedBox(height: 30),
-
-                  Categories(),
-
-                  SizedBox(height: 30),
-
-                  // Popular Places
+                  const SearchBarWidget(),
+                  const SizedBox(height: 30),
+                  const Categories(),
+                  const SizedBox(height: 30),
                   const Text(
                     'Popular Places',
                     style: TextStyle(
@@ -34,10 +31,9 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Epilogue'),
                   ),
-
-                  SizedBox(height: 20),
-
-                  for (int i = 0; i < 5; i++) PopularPlacesCard(),
+                  const SizedBox(height: 20),
+                  //TODO: Update the popular places listed on home page
+                  for (int i = 0; i < 5; i++) const PopularPlacesCard(),
                 ],
               ),
             ),

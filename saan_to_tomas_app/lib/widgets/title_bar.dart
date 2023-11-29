@@ -1,38 +1,35 @@
 import 'package:flutter/material.dart';
 
-class TitleBar extends StatefulWidget {
-  const TitleBar({super.key});
+class TitleBar extends StatelessWidget {
+  const TitleBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
-  @override
-  State<TitleBar> createState() => _TitleBarState();
-}
-
-class _TitleBarState extends State<TitleBar> {
+  final String title;
+  //TODO: If possible, center the text
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        height: 10,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Expanded(
-              child: TextButton(
-                child: const Icon(
-                    Icons.arrow_back
-                ),
-                onPressed: () {},
-              ),
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: Color(0xFF00529B)),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/');
+            },
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFF00529B),
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
             ),
-            const Expanded(
-                flex: 24,
-                child: Text("Angkong", textAlign: TextAlign.center,)
-            )
-          ],
-        ),
+          ),
+        ],
       ),
-    ) ;
+    );
   }
 }

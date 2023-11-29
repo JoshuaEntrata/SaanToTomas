@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({Key? key}) : super(key: key);
-
+  //TODO: Make this functional
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
-        border: Border.all(color: Color(0xFF00529B)),
+        border: Border.all(color: const Color(0xFF00529B)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
+      child: const Row(
         children: [
           Icon(Icons.search, color: Color(0xFF00529B)),
           SizedBox(width: 8),
