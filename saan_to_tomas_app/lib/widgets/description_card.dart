@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:saan_to_tomas_app/database/places_db_v2.dart';
+import 'package:saan_to_tomas_app/model/places.dart';
+
+final PlacesDB placesDB = PlacesDB();
+final Places places = placesDB.getPlace();
 
 class DescriptionCard extends StatefulWidget {
   const DescriptionCard({super.key});
@@ -39,47 +44,46 @@ class _DescriptionCardState extends State<DescriptionCard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const Text("Angkong Dimsum"),
+                              Text(places.name),
                               Container(
                                   decoration: const BoxDecoration(
                                       color: Colors.blue,
                                       borderRadius: BorderRadius.all(Radius.circular(50))
                                   ),
-                                  child: const Text("Restaurant")
+                                  child: Text(places.category)
                               )
                             ],
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.location_on,
                                 color: Colors.blue,
                               ),
-                              Text("1241 Asturias St, Sampaloc, Manila, 1015 Metro Manila")
+                              Flexible(
+                                  child: Text(places.address, softWrap: true,)
+                              )
                             ],
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.view_headline,
                                 color: Colors.blue,
                               ),
                               Flexible(
-                                child: Text("Angkong Dimsum House, located on P. Noval street, sells a variety of different kinds of siomai:"
-                                    "it has pork, chicken, quail, and Japanese siomai."
-                                    " It also offers different kinds of dumplings, if you’re looking for something a little different.",
-                                  softWrap: true,
-                                ),
+                                child: Text(places.description, softWrap: true,),
                               ),
                             ],
                           ),
                         ),
+
                       ],
                     )
                 );

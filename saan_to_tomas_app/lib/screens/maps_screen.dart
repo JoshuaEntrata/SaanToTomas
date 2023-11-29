@@ -4,6 +4,11 @@ import 'package:saan_to_tomas_app/widgets/directions_handler.dart';
 import '../model/directions_model.dart';
 import 'package:saan_to_tomas_app/widgets/description_card.dart';
 import 'package:saan_to_tomas_app/widgets/title_bar.dart';
+import 'package:saan_to_tomas_app/model/places.dart';
+import 'package:saan_to_tomas_app/database/places_db_v2.dart';
+
+final PlacesDB placesDB = PlacesDB();
+final Places places = placesDB.getPlace();
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -35,27 +40,28 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+
+  late Directions _directions;
+  late GoogleMapController _googleMapController;
+
   static const _initialCameraPosition = CameraPosition(
     //TODO: gawing in between ng origin and destination yung cam pos
       target: LatLng(14.6100, 120.9893),
       zoom: 18
   );
 
-  late GoogleMapController _googleMapController;
-  static final Marker _origin = Marker(
+  static final _origin = Marker(
       markerId:  const MarkerId("origin"),
       infoWindow: const InfoWindow(title: 'Origin'),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       position: const LatLng(14.6100, 120.9893)
   );
-  static final Marker _destination = Marker(
+  static final _destination = Marker(
       markerId:  const MarkerId("destination"),
       infoWindow: const InfoWindow(title: 'destination'),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      position: const LatLng(14.611999503514589, 120.98737241591724)
+      position: LatLng(places.latitude, places.longitude)
   );
-  late Directions _directions;
-
 
   void setDirection() async {
     final directions = await DirectionsHandler()
@@ -63,11 +69,16 @@ class _MapScreenState extends State<MapScreen> {
     setState(() => _directions = directions);
   }
 
+  void fetchPlace() {
+
+  }
+
   @override
   void initState() {
     // getPolyPoints();
-    setDirection();
     super.initState();
+    fetchPlace();
+    setDirection();
   }
 
   @override
@@ -80,12 +91,12 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 20,
-      child: Stack(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: GoogleMap(
+      child: SizedBox(
+        height: double.infinity,
+        // TODO: Fix overflow of map
+        child: Stack(
+            children: [
+              GoogleMap(
                 zoomControlsEnabled: false,
                 myLocationButtonEnabled: false,
                 initialCameraPosition: _initialCameraPosition,
@@ -102,47 +113,47 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                 },
               ),
-            ),
-            Positioned(
-              bottom: 30,
-              right: 20,
-              child: FloatingActionButton(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                onPressed: () => _googleMapController.animateCamera(
-                  CameraUpdate.newCameraPosition(_initialCameraPosition),
+              Positioned(
+                bottom: 30,
+                right: 20,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  onPressed: () => _googleMapController.animateCamera(
+                    CameraUpdate.newCameraPosition(_initialCameraPosition),
+                  ),
+                  child: const Icon(Icons.center_focus_strong),
                 ),
-                child: const Icon(Icons.center_focus_strong),
               ),
-            ),
-            Positioned(
-              top: 20,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 6.0,
-                  horizontal: 12.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.yellowAccent,
-                  borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(0, 2),
-                      blurRadius: 6.0,
-                    )
-                  ],
-                ),
-                child: Text(
-                  '${_directions.totalDistance}, ${_directions.totalDuration}',
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
+              Positioned(
+                top: 20,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 6.0,
+                    horizontal: 12.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.yellowAccent,
+                    borderRadius: BorderRadius.circular(20.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(0, 2),
+                        blurRadius: 6.0,
+                      )
+                    ],
+                  ),
+                  child: Text(
+                    '${_directions.totalDistance}, ${_directions.totalDuration}',
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ]
+            ]
+        ),
       ),
     );
   }
