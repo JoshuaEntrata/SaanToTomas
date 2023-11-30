@@ -27,13 +27,15 @@ class MyApp extends StatelessWidget {
           final Map<String, dynamic>? args =
               settings.arguments as Map<String, dynamic>?;
 
-          final category = args?['category'] ?? '';
+          final searchString = args?['searchString'] ?? '';
           final places = args?['places'] ?? [];
+          String category = args?['category'] ?? '';
 
           return MaterialPageRoute(
             builder: (context) => ResultPage(
-              category: category,
+              searchString: searchString,
               places: places,
+              category: category,
             ),
           );
         }

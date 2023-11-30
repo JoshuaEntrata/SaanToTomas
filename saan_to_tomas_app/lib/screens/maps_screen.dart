@@ -30,15 +30,15 @@ class MapPageState extends State<MapPage> {
         child: Stack(
           children: <Widget>[
             MapScreen(place: place),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: DescriptionCard(place: place),
-              ),
-            ),
+            // Positioned(
+            //   left: 0,
+            //   right: 0,
+            //   bottom: 0,
+            //   child: Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: DescriptionCard(place: place),
+            //   ),
+            // ),
           ],
         ),
       ),

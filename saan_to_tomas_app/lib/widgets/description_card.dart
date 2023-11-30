@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import '../model/places.dart';
 
 class DescriptionCard extends StatefulWidget {
-  DescriptionCard({Key? key, required this.place});
+  DescriptionCard({Key? key, required this.place, required this.distance,
+  required this.duration});
   final Places place;
+  String distance;
+  String duration;
 
   @override
-  State<DescriptionCard> createState() => _DescriptionCardState(place);
+  State<DescriptionCard> createState() => _DescriptionCardState(place, distance, duration);
 }
 
 class _DescriptionCardState extends State<DescriptionCard> {
-  _DescriptionCardState(this.place);
+  _DescriptionCardState(this.place, this.duration, this.distance,);
   final Places place;
+  String distance;
+  String duration;
 
   @override
   Widget build(BuildContext context) {
+    // print('$distance pota');
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
@@ -28,6 +34,10 @@ class _DescriptionCardState extends State<DescriptionCard> {
         minimumSize: const Size(double.infinity, 50),
       ),
       onPressed: () {
+        setState(() {
+          distance = distance;
+
+        });
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
@@ -100,7 +110,7 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            place.address,
+                            '${place.address} · $distance km · $duration min',
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w500,

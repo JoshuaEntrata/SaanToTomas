@@ -21,6 +21,7 @@ class TitleBar extends StatelessWidget {
               icon: const Icon(Icons.chevron_left_rounded,
                   size: 32, color: Color(0xFF00529B)),
               onPressed: () {
+                // TODO: gawing previous page pupunta
                 Navigator.pushReplacementNamed(context, '/');
               },
             ),

@@ -4,7 +4,7 @@ import '../database/places_db_v2.dart';
 import '../model/places.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({Key? key});
+  const Categories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,14 @@ class Categories extends StatelessWidget {
   }
 
   Widget buildCategoryItem(
-      BuildContext context, String title, String iconName) {
+      BuildContext context, String category, String iconName) {
     return GestureDetector(
       onTap: () {
         final PlacesDB placesDB = PlacesDB();
-        List<Places> places = placesDB.getCategoryList(title);
+        List<Places> places = placesDB.getCategoryList(category);
         Navigator.of(context).pushReplacementNamed('/result', arguments: {
           'places': places,
-          'category': title,
+          'category': category,
         });
       },
       child: SizedBox(
@@ -54,7 +54,7 @@ class Categories extends StatelessWidget {
               height: 50,
             ),
             const SizedBox(height: 5),
-            Text(title, textAlign: TextAlign.center),
+            Text(category, textAlign: TextAlign.center),
           ],
         ),
       ),
