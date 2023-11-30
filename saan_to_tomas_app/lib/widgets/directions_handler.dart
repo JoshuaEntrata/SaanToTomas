@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:saan_to_tomas_app/widgets/.env.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../widgets/.env.dart';
 import '../model/directions_model.dart';
 
 class DirectionsHandler {
@@ -26,15 +26,11 @@ class DirectionsHandler {
     );
     // return Directions.fromMap(response.data);
     if (response.statusCode == 200) {
-      // Ensure the response data is of type Map<String, dynamic>
       Map<String, dynamic> responseData = response.data as Map<String, dynamic>;
 
-      // Call Directions.fromMap with the responseData
       return Directions.fromMap(responseData);
     } else {
-      // Handle the case where the response is not successful
       throw Exception('Failed to fetch directions');
     }
   }
-
 }

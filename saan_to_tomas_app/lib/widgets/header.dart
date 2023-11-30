@@ -43,28 +43,29 @@ class HeaderWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   const HeaderWidget({Key? key, this.title = ''}) : super(key: key);
-  //TODO: Fix the padding and position of the contents of Header widget
+
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize {
+    if (title.isNotEmpty) {
+      return const Size.fromHeight(80);
+    } else {
+      return const Size.fromHeight(kToolbarHeight);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
       automaticallyImplyLeading: false,
-      title: Container(
-        child: title.isNotEmpty
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SaanToTomasText(),
-                  TitleBar(title: title),
-                ],
-              )
-            : const Center(
-                child: SaanToTomasText(),
-              ),
+      flexibleSpace: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SaanToTomasText(),
+          if (title.isNotEmpty) const SizedBox(height: 10),
+          title.isNotEmpty ? TitleBar(title: title) : Container(),
+        ],
       ),
     );
   }

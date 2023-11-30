@@ -4,8 +4,9 @@ import '../widgets/categories.dart';
 import '../widgets/place_card.dart';
 import '../widgets/header.dart';
 // TODO: remove import. for testing only
-import 'package:saan_to_tomas_app/database/places_db_v2.dart';
-import 'package:saan_to_tomas_app/model/places.dart';
+import '../database/places_db_v2.dart';
+import '../model/places.dart';
+
 final PlacesDB placesDB = PlacesDB();
 final Places places = placesDB.getPlace();
 
@@ -14,31 +15,47 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> specificPlaces = [
+      "Angkong Dimsum House",
+      "Anytime Fitness University Belt",
+      "933 Creatives",
+      "Manila Cafe",
+      "UST Museum",
+    ];
+
+    List<Places> placesList = specificPlaces.map((placeName) {
+      return placesDB.getPlaceByName(placeName);
+    }).toList();
+
     return Scaffold(
       appBar: const HeaderWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               color: const Color(0xFFFAFAFA),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SearchBarWidget(),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   const Categories(),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   const Text(
                     'Popular Places',
                     style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Epilogue'),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Epilogue',
+                      color: Color(0xFF00529B),
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  //TODO: Update the popular places listed on home page
-                  for (int i = 0; i < 5; i++) PopularPlacesCard(place: places,),
+                  const SizedBox(height: 10),
+                  for (Places place in placesList)
+                    PopularPlacesCard(
+                      place: place,
+                    ),
                 ],
               ),
             ),

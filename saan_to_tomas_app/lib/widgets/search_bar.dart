@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:saan_to_tomas_app/database/places_db_v2.dart';
-import 'package:saan_to_tomas_app/model/places.dart';
+import '../database/places_db_v2.dart';
+import '../model/places.dart';
 
 final PlacesDB placesDB = PlacesDB();
 final Places places = placesDB.getPlace();
@@ -10,29 +10,26 @@ String? value;
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({Key? key}) : super(key: key);
 
-  //TODO: Make this functional
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(40),
         color: Colors.white,
         border: Border.all(color: const Color(0xFF00529B)),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
           TextButton(
             onPressed: () {
-              List<Places> places =  placesDB.search(value!);
+              List<Places> places = placesDB.search(value!);
               Navigator.of(context).pushReplacementNamed('/result', arguments: {
-                'places': places, 'category': value!,
+                'places': places,
+                'category': "Results",
               });
-              // Navigator.pushReplacementNamed(context, '/map');
             },
-            child: const Icon(Icons.search, color: Color(0xFF00529B)),
+            child: const Icon(Icons.search, color: Color(0xFF00529B), size: 20),
           ),
-          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               onChanged: (text) {
@@ -40,9 +37,11 @@ class SearchBarWidget extends StatelessWidget {
               },
               onSubmitted: (text) {
                 value = text;
-                List<Places> places =  placesDB.search(value!);
-                Navigator.of(context).pushReplacementNamed('/result', arguments: {
-                  'places': places, 'category': value!,
+                List<Places> places = placesDB.search(value!);
+                Navigator.of(context)
+                    .pushReplacementNamed('/result', arguments: {
+                  'places': places,
+                  'category': "Results",
                 });
               },
               style: const TextStyle(
