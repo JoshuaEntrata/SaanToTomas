@@ -37,7 +37,7 @@ class Categories extends StatelessWidget {
       onTap: () {
         final PlacesDB placesDB = PlacesDB();
         List<Places> places = placesDB.getCategoryList(category);
-        Navigator.of(context).pushReplacementNamed('/result', arguments: {
+        Navigator.of(context).pushNamed('/result', arguments: {
           'places': places,
           'category': category,
         });
