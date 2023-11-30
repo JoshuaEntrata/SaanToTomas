@@ -46,7 +46,6 @@ class PopularPlacesCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                //TODO: Update this so it gets the image of a specific place
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),

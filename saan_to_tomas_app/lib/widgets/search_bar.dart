@@ -7,9 +7,10 @@ final Places places = placesDB.getPlace();
 final _formKey = GlobalKey<FormState>();
 String? value;
 
-class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({Key? key}) : super(key: key);
 
+class SearchBarWidget extends StatelessWidget {
+  SearchBarWidget({Key? key, this.category}) : super(key: key);
+  String? category;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,11 +23,22 @@ class SearchBarWidget extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              List<Places> places = placesDB.search(value!);
-              Navigator.of(context).pushReplacementNamed('/result', arguments: {
-                'places': places,
-                'category': "Results",
-              });
+              if (category != null) {
+                print('${category!}pota2');
+                List<Places> places = placesDB.categorySearch(value!, category!);
+                Navigator.of(context).pushReplacementNamed('/result', arguments: {
+                  'places': places,
+                  'category': category,
+                  'searchString': value
+                });
+              }
+              else {
+                List<Places> places = placesDB.search(value!);
+                Navigator.of(context).pushReplacementNamed('/result', arguments: {
+                  'places': places,
+                  'category': "Results",
+                });
+              }
             },
             child: const Icon(Icons.search, color: Color(0xFF00529B), size: 20),
           ),
@@ -37,12 +49,21 @@ class SearchBarWidget extends StatelessWidget {
               },
               onSubmitted: (text) {
                 value = text;
-                List<Places> places = placesDB.search(value!);
-                Navigator.of(context)
-                    .pushReplacementNamed('/result', arguments: {
-                  'places': places,
-                  'category': "Results",
-                });
+                if (category != null) {
+                  List<Places> places = placesDB.categorySearch(value!, category!);
+                  Navigator.of(context).pushReplacementNamed('/result', arguments: {
+                    'places': places,
+                    'category': category,
+                    'searchString': value
+                  });
+                }
+                else {
+                  List<Places> places = placesDB.search(value!);
+                  Navigator.of(context).pushReplacementNamed('/result', arguments: {
+                    'places': places,
+                    'category': "Results",
+                  });
+                }
               },
               style: const TextStyle(
                 fontFamily: 'Epilogue',

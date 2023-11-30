@@ -3,16 +3,12 @@ import '../widgets/search_bar.dart';
 import '../widgets/categories.dart';
 import '../widgets/place_card.dart';
 import '../widgets/header.dart';
-// TODO: remove import. for testing only
-import '../database/places_db_v2.dart';
 import '../model/places.dart';
 
-final PlacesDB placesDB = PlacesDB();
-final Places places = placesDB.getPlace();
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
+  // TODO: Ayusin splash screen
   @override
   Widget build(BuildContext context) {
     List<String> specificPlaces = [
@@ -38,7 +34,7 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SearchBarWidget(),
+                  SearchBarWidget(),
                   const SizedBox(height: 20),
                   const Categories(),
                   const SizedBox(height: 20),

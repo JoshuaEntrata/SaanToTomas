@@ -328,6 +328,23 @@ class PlacesDB {
       if (nameTemp.contains(name.toUpperCase())) {
         places.add(place);
       }
+      // if (nameTemp.contains(name.toUpperCase()) && category != null) {
+      //   places.add(place);
+      // }
+
+  }
+    return places;
+  }
+
+  List<Places> categorySearch(String name, String category) {
+    List<Places> places = [];
+    for (Places place in _places) {
+      String nameTemp = place.name.toUpperCase();
+      String categoryTemp = place.category.toUpperCase();
+      if (nameTemp.contains(name.toUpperCase()) && categoryTemp.contains(category.toUpperCase())) {
+        places.add(place);
+      }
+
     }
     return places;
   }
