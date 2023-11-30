@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import '../model/places.dart';
 
 class DescriptionCard extends StatefulWidget {
-  DescriptionCard({Key? key, required this.place, required this.distance,
-  required this.duration});
+  DescriptionCard({
+    Key? key,
+    required this.place,
+    required this.distance,
+    required this.duration,
+  }) : super(key: key);
+
   final Places place;
   String distance;
   String duration;
 
   @override
-  State<DescriptionCard> createState() => _DescriptionCardState(place, distance, duration);
+  State<DescriptionCard> createState() => _DescriptionCardState();
 }
 
 class _DescriptionCardState extends State<DescriptionCard> {
-  _DescriptionCardState(this.place, this.duration, this.distance,);
-  final Places place;
-  String distance;
-  String duration;
-
   @override
   Widget build(BuildContext context) {
-    // print('$distance pota');
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
@@ -34,10 +33,6 @@ class _DescriptionCardState extends State<DescriptionCard> {
         minimumSize: const Size(double.infinity, 50),
       ),
       onPressed: () {
-        setState(() {
-          distance = distance;
-
-        });
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
@@ -69,7 +64,7 @@ class _DescriptionCardState extends State<DescriptionCard> {
                       children: [
                         Expanded(
                           child: Text(
-                            place.name,
+                            widget.place.name,
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.bold,
@@ -90,7 +85,7 @@ class _DescriptionCardState extends State<DescriptionCard> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            place.category,
+                            widget.place.category,
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.bold,
@@ -110,11 +105,11 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            '${place.address} · $distance km · $duration min',
+                            '${widget.place.address} · ${widget.distance} · ${widget.duration}',
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                         ),
@@ -129,11 +124,11 @@ class _DescriptionCardState extends State<DescriptionCard> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            place.description,
+                            widget.place.description,
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                         ),
