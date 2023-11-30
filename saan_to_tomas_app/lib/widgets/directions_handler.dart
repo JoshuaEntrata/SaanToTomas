@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../widgets/.env.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../model/directions_model.dart';
 
 class DirectionsHandler {
@@ -15,6 +15,9 @@ class DirectionsHandler {
     required LatLng origin,
     required LatLng destination,
   }) async {
+    await dotenv.load(fileName: '.env');
+    final String googleAPIKey = dotenv.env['GOOGLE_API_KEY'] ?? '';
+
     final response = await _dio.get(
       _baseUrl,
       queryParameters: {
