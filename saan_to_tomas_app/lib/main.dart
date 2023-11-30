@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/result_screen.dart';
-// TODO: remove this import. for testing only
 import '../database/places_db_v2.dart';
 import '../model/places.dart';
 
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Final Academic Project',
       initialRoute: '/',
       onGenerateRoute: (settings) {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           );
         } else if (settings.name == '/result') {
           final Map<String, dynamic>? args =
-              settings.arguments as Map<String, dynamic>?;
+          settings.arguments as Map<String, dynamic>?;
 
           final searchString = args?['searchString'] ?? '';
           final places = args?['places'] ?? [];
