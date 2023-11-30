@@ -6,6 +6,7 @@ class Places {
   final double latitude;
   final double longitude;
   final String category;
+  final String image;
 
   Places({
     // required this.placeId,
@@ -15,6 +16,7 @@ class Places {
     required this.latitude,
     required this.longitude,
     required this.category,
+    required this.image,
   });
 
   // factory Places.fromSqfliteDatabase(Map<String, dynamic> place) => Places(
@@ -26,5 +28,4 @@ class Places {
   // longitude: place['longitude'] ?? 0.0,
   // category: place['category'] ?? ''
   // );
-
 }

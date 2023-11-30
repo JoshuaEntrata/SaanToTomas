@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:saan_to_tomas_app/database/places_db_v2.dart';
-import 'package:saan_to_tomas_app/model/places.dart';
+import '../database/places_db_v2.dart';
+import '../model/places.dart';
 
 class Categories extends StatelessWidget {
   const Categories({Key? key});
@@ -18,7 +18,7 @@ class Categories extends StatelessWidget {
             buildCategoryItem(context, 'Study Hub', 'CustomStudyHub'),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -36,9 +36,10 @@ class Categories extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         final PlacesDB placesDB = PlacesDB();
-        List<Places> places =  placesDB.getCategoryList(title);
+        List<Places> places = placesDB.getCategoryList(title);
         Navigator.of(context).pushReplacementNamed('/result', arguments: {
-          'places': places, 'category': title,
+          'places': places,
+          'category': title,
         });
       },
       child: SizedBox(
