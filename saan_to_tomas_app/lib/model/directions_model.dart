@@ -7,6 +7,7 @@ class Directions {
   final String totalDistance;
   final String totalDuration;
 
+
   const Directions({
     required this.bounds,
     required this.polylinePoints,
