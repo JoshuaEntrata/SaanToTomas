@@ -102,7 +102,6 @@ class PopularPlacesCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
                     SizedBox(
                       width: 220,
                       child: Row(
