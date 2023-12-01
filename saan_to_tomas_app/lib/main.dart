@@ -3,6 +3,7 @@ import '../screens/home_screen.dart';
 import '../screens/result_screen.dart';
 import '../database/places_db_v2.dart';
 import '../model/places.dart';
+import '../screens/splash_screen.dart';
 
 final PlacesDB placesDB = PlacesDB();
 final Places places = placesDB.getPlace();
@@ -17,15 +18,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Final Academic Project',
-      initialRoute: '/',
+      home: SplashScreen(),
       onGenerateRoute: (settings) {
-        if (settings.name == '/') {
+        if (settings.name == '/home') {
           return MaterialPageRoute(
             builder: (context) => const HomePage(),
           );
         } else if (settings.name == '/result') {
           final Map<String, dynamic>? args =
-          settings.arguments as Map<String, dynamic>?;
+              settings.arguments as Map<String, dynamic>?;
 
           final searchString = args?['searchString'] ?? '';
           final places = args?['places'] ?? [];
@@ -39,7 +40,6 @@ class MyApp extends StatelessWidget {
             ),
           );
         }
-        // Handle other routes if needed
         return null;
       },
     );

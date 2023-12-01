@@ -8,7 +8,7 @@ class SaanToTomasText extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushReplacementNamed(context, '/home');
       },
       child: RichText(
         text: TextSpan(
