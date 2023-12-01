@@ -33,6 +33,7 @@ class ResultPage extends StatelessWidget {
             if (category == null) SearchBarWidget()
             else SearchBarWidget(category: category),
             const SizedBox(height: 20),
+            if (places.isNotEmpty)
             for (Places place in places)
               Column(
                 children: [
@@ -40,7 +41,8 @@ class ResultPage extends StatelessWidget {
                     place: place,
                   ),
                 ],
-              ),
+              )
+            else const Text("Sorry we do not have what you are looking for."),
           ],
         ),
       ),

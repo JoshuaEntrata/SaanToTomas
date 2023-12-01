@@ -24,7 +24,6 @@ class SearchBarWidget extends StatelessWidget {
           TextButton(
             onPressed: () {
               if (category != null) {
-                print('${category!}pota2');
                 List<Places> places = placesDB.categorySearch(value!, category!);
                 Navigator.of(context).pushReplacementNamed('/result', arguments: {
                   'places': places,
@@ -36,7 +35,7 @@ class SearchBarWidget extends StatelessWidget {
                 List<Places> places = placesDB.search(value!);
                 Navigator.of(context).pushReplacementNamed('/result', arguments: {
                   'places': places,
-                  'category': "Results",
+                  'searchString': "Results",
                 });
               }
             },
@@ -61,7 +60,7 @@ class SearchBarWidget extends StatelessWidget {
                   List<Places> places = placesDB.search(value!);
                   Navigator.of(context).pushReplacementNamed('/result', arguments: {
                     'places': places,
-                    'category': "Results",
+                    'searchString': "Results",
                   });
                 }
               },

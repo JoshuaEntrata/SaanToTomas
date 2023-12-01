@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 
           final searchString = args?['searchString'] ?? '';
           final places = args?['places'] ?? [];
-          String category = args?['category'] ?? '';
+          String? category = args?['category'];
 
           return MaterialPageRoute(
             builder: (context) => ResultPage(
