@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/header.dart';
 import '../widgets/map_widget.dart';
-import '../widgets/description_card.dart';
 import '../model/places.dart';
 
 class MapPage extends StatefulWidget {
@@ -30,15 +29,6 @@ class MapPageState extends State<MapPage> {
         child: Stack(
           children: <Widget>[
             MapScreen(place: place),
-            // Positioned(
-            //   left: 0,
-            //   right: 0,
-            //   bottom: 0,
-            //   child: Align(
-            //     alignment: Alignment.bottomCenter,
-            //     child: DescriptionCard(place: place),
-            //   ),
-            // ),
           ],
         ),
       ),

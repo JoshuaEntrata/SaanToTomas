@@ -1,5 +1,4 @@
 class Places {
-  // final int placeId;
   final String name;
   final String address;
   final String description;
@@ -9,7 +8,6 @@ class Places {
   final String image;
 
   Places({
-    // required this.placeId,
     required this.name,
     required this.address,
     required this.description,
@@ -18,14 +16,4 @@ class Places {
     required this.category,
     required this.image,
   });
-
-  // factory Places.fromSqfliteDatabase(Map<String, dynamic> place) => Places(
-  // // placeId: place['places_id']?.toDartInt() ?? 0,
-  // name: place['name'] ?? '',
-  // address: place['address'] ?? '',
-  // description: place['description'] ?? '',
-  // latitude: place['latitude'] ?? 0.0,
-  // longitude: place['longitude'] ?? 0.0,
-  // category: place['category'] ?? ''
-  // );
 }

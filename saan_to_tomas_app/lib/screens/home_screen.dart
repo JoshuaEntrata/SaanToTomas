@@ -5,10 +5,8 @@ import '../widgets/place_card.dart';
 import '../widgets/header.dart';
 import '../model/places.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-  // TODO: Ayusin splash screen
   @override
   Widget build(BuildContext context) {
     List<String> specificPlaces = [
