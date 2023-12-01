@@ -68,7 +68,7 @@ class PopularPlacesCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: screenWidth - 170,
+                      width: screenWidth - 174,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
