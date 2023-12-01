@@ -9,6 +9,8 @@ class PopularPlacesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
@@ -66,7 +68,7 @@ class PopularPlacesCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 240.0,
+                      width: screenWidth - 170,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
