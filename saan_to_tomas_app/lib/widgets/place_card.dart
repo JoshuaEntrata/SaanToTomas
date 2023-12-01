@@ -105,7 +105,7 @@ class PopularPlacesCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 220,
+                      width: screenWidth - 200,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -128,7 +128,7 @@ class PopularPlacesCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 220,
+                      width: screenWidth - 200,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
